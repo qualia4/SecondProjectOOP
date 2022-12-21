@@ -11,13 +11,15 @@ protected:
     string name;
     int due_date;
     int weight;
-    
+
 public:
     Product(string name, int due_date, int weight){
         this->name = name;
         this->due_date = due_date;
         this->weight = weight;
     }
+
+    //Product(){}
 
     string getName(){
         return name;
