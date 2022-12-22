@@ -1,13 +1,16 @@
 #include "Product.h"
 #include "vector"
+#include <iostream>
 #ifndef SECONDPROJECTOOP_SHELVE_H
 #define SECONDPROJECTOOP_SHELVE_H
 
 
 class Shelve {
+protected:
     vector<Product*> products;
     int capacity;
     int filled;
+
 public:
     Shelve(int capacity, int filled){
         this->capacity = capacity;
