@@ -19,8 +19,18 @@ public:
         this->weight = weight;
     }
 
-    //Product(){}
-
+    void view(){
+        cout << "Product: " << name << ". ";
+        cout << "Weight: " << weight << ". ";
+        cout << "Due date: " << due_date << " days left." << endl;
+    }
+    bool nextDay(){
+        due_date--;
+        if(due_date < 1){
+            return false;
+        }
+        return true;
+    }
     string getName(){
         return name;
     }

@@ -23,6 +23,37 @@ public:
         }
         products.push_back(product);
     }
+    void take(string name){
+        for(int i = 0; i < products.size(); i++){
+            if(products[i]->getName() == name){
+                delete products[i];
+                products.erase(products.begin() + i);
+                break;
+            }
+        }
+    }
+    Product* move(string name){
+        for(int i = 0; i < products.size(); i++){
+            if(products[i]->getName() == name){
+                Product* prodToMove = products[i];
+                products.erase(products.begin() + i);
+                return prodToMove;
+            }
+        }
+    }
+    void view(){
+        for(int i = 0; i < products.size(); i++){
+            products[i]->view();
+        }
+    }
+    void nextDay(){
+        for(int i = 0; i < products.size(); i++){
+            if(!products[i]->nextDay()){
+                delete products[i];
+                products.erase(products.begin() + i);
+            }
+        }
+    }
     int getCapacity(){
         return capacity;
     }
@@ -32,4 +63,4 @@ public:
 };
 
 
-#endif //SECONDPROJECTOOP_SHELVE_H
+#endif
