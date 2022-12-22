@@ -12,7 +12,7 @@ protected:
     int filled;
 
 public:
-    Shelve(int capacity, int filled){
+    Shelve(int capacity = 10, int filled = 0){
         this->capacity = capacity;
         this->filled = filled;
     }
@@ -22,12 +22,14 @@ public:
             return;
         }
         products.push_back(product);
+        filled++;
     }
     void take(string name){
         for(int i = 0; i < products.size(); i++){
             if(products[i]->getName() == name){
                 delete products[i];
                 products.erase(products.begin() + i);
+                filled--;
                 break;
             }
         }
@@ -37,6 +39,7 @@ public:
             if(products[i]->getName() == name){
                 Product* prodToMove = products[i];
                 products.erase(products.begin() + i);
+                filled--;
                 return prodToMove;
             }
         }
@@ -51,6 +54,7 @@ public:
             if(!products[i]->nextDay()){
                 delete products[i];
                 products.erase(products.begin() + i);
+                filled--;
             }
         }
     }
