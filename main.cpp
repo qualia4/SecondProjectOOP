@@ -21,9 +21,11 @@ int main() {
     myFile.open("info.txt");
     string line;
     getline(myFile, line);
+    cout << line << endl;
     int length = stoi(line);
     for(int i = 0; i < length; i++){
         getline(myFile, line);
+        cout << line << endl;
         vector<string> commands = split(line, ' ');
         if(commands[0] == "Shelve"){
             Shelve* shelve = new Shelve();
@@ -80,6 +82,13 @@ int main() {
             }
             refrigerators.push_back(refrigerator);
         }
+    }
+    while(1){
+        cout << "Enter command: ";
+        string entered;
+        getline(cin, entered);
+        vector<string> parametrs = split(entered, ' ');
+        string command = parametrs[0];
     }
 }
 
