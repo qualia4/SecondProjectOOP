@@ -89,29 +89,102 @@ int main() {
         getline(cin, entered);
         vector<string> parametrs = split(entered, ' ');
         string command = parametrs[0];
+        if(command == "break"){
+            break;
+        }
+        else if(command == "viewAll"){
+            for(int i = 0; i < shelves.size(); i++){
+                cout << "Shelve " << i << ":" << endl;
+                shelves[i]->view();
+            }
+            for(int i = 0; i < freezers.size(); i++){
+                cout << "Freezer " << i << ":" << endl;
+                freezers[i]->view();
+            }
+            for(int i = 0; i < refrigerators.size(); i++){
+                cout << "Refrigerate  " << i << ":" << endl;
+                refrigerators[i]->view();
+            }
+        }
+        else if(command == "view"){
+            if(parametrs[1] == "shelves"){
+                for(int i = 0; i < shelves.size(); i++){
+                    cout << "Shelve " << i << ":" << endl;
+                    shelves[i]->view();
+                }
+            }
+            else if(parametrs[1] == "freezers"){
+                for(int i = 0; i < freezers.size(); i++){
+                    cout << "Freezer " << i << ":" << endl;
+                    freezers[i]->view();
+                }
+            }
+            else if(parametrs[2] == "refrigerators"){
+                for(int i = 0; i < refrigerators.size(); i++){
+                    cout << "Refrigerate  " << i << ":" << endl;
+                    refrigerators[i]->view();
+                }
+            }
+        }
+        else if(command == "nextDay"){
+            for(int i = 0; i < shelves.size(); i++){
+                shelves[i]->nextDay();
+            }
+            for(int i = 0; i < freezers.size(); i++){
+                freezers[i]->nextDay();
+            }
+            for(int i = 0; i < refrigerators.size(); i++){
+                refrigerators[i]->nextDay();
+            }
+            cout << "Done!" << endl;
+        }
+        else if(command == "take"){
+            string container_type = parametrs[1];
+            int container_index = stoi(parametrs[2]);
+            if(container_type == "Shelve"){
+                shelves[container_index]->take(parametrs[3]);
+            }
+            else if(container_type == "Freezer"){
+                freezers[container_index]->take(parametrs[3]);
+            }
+            else if(container_type == "Refrigerator"){
+                refrigerators[container_index]->take(parametrs[3]);
+            }
+        }
+        else if(command == "setTemp"){
+            string container_type = parametrs[1];
+            int container_index = stoi(parametrs[2]);
+            if(container_type == "Refrigerator"){
+                refrigerators[container_index]->setTemperature(stoi(parametrs[3]));
+            }
+            else if(container_type == "Freezer"){
+                freezers[container_index]->setTemperature(stoi(parametrs[3]));
+            }
+        }
+        else if(command == "move"){
+            string container_type = parametrs[1];
+            int container_index = stoi(parametrs[2]);
+            string element_name = parametrs[4];
+            int container2_index = stoi(parametrs[3]);
+            Product* product;
+            if(container_type == "Shelve"){
+                product = shelves[container_index]->move(element_name);
+                shelves[container2_index]->addProduct(product);
+                cout << element_name << " successfully moved!" << endl;
+            }
+            else if(container_type == "Freezer"){
+                product = freezers[container_index]->move(element_name);
+                freezers[container2_index]->addProduct(product);
+                cout << element_name << " successfully moved!" << endl;
+            }
+            else if(container_type == "Refrigerator"){
+                product = refrigerators[container_index]->move(element_name);
+                refrigerators[container2_index]->addProduct(product);
+                cout << element_name << " successfully moved!" << endl;
+            }
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 vector<string> split(const string line, char delim) {
     vector<string> result;

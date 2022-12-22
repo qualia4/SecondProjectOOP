@@ -51,7 +51,8 @@ public:
     }
     void nextDay(){
         for(int i = 0; i < products.size(); i++){
-            if(!products[i]->nextDay()){
+            bool state = products[i]->nextDay();
+            if(!state){
                 delete products[i];
                 products.erase(products.begin() + i);
                 filled--;

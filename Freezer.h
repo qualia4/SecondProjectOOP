@@ -18,6 +18,7 @@ public:
     void setTemperature(int temp){
         if(temp >= minTemp && temp <= maxTemp){
             this->temperature = temp;
+            cout << "Temperature set to " << temp  << endl;
         }
         else{
             throw invalid_argument("You can not set such temperature");
