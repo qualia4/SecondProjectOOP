@@ -6,7 +6,7 @@
 class Eggs: public Product{
     int amount;
 public:
-    Eggs(string name, int due_date, int weight, int amount) : Product(name, due_date, weight), amount(amount){}
+    Eggs(string name, int due_date, double weight, int amount) : Product(name, due_date, weight), amount(amount){}
     void view(){
         cout << "Product: " << name << ". ";
         cout << "Number: " << amount << ". ";

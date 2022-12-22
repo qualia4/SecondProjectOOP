@@ -7,13 +7,12 @@ using namespace std;
 
 class Product {
 protected:
-
     string name;
     int due_date;
-    int weight;
+    double weight;
 
 public:
-    Product(string name, int due_date, int weight){
+    Product(string name, int due_date, double weight){
         this->name = name;
         this->due_date = due_date;
         this->weight = weight;
