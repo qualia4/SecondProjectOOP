@@ -30,6 +30,11 @@ public:
     void printScope(){
         cout << "Scope: " << minTemp << "-" << maxTemp << endl;
     }
+    ~Freezer(){
+        for(int i = 0; i < products.size(); i++){
+            delete[]products[i];
+        }
+    }
 
 };
 

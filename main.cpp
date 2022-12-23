@@ -184,6 +184,16 @@ int main() {
             }
         }
     }
+    for(int i = 0; i < shelves.size(); i++){
+        delete shelves[i];
+    }
+    for(int i = 0; i < refrigerators.size(); i++){
+        delete refrigerators[i];
+    }
+    for(int i = 0; i < freezers.size(); i++){
+        delete freezers[i];
+    }
+    myFile.close();
 }
 
 vector<string> split(const string line, char delim) {

@@ -65,6 +65,11 @@ public:
     int getFilled(){
         return filled;
     }
+    ~Shelve(){
+        for(int i = 0; i < products.size(); i++){
+            delete[]products[i];
+        }
+    }
 };
 
 
