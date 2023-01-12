@@ -18,7 +18,7 @@ public:
         this->weight = weight;
     }
 
-    void view(){
+    virtual void view() {
         cout << "Product: " << name << ". ";
         cout << "Weight: " << weight << ". ";
         cout << "Due date: " << due_date << " days left." << endl;

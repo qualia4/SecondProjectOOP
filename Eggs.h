@@ -7,7 +7,7 @@ class Eggs: public Product{
     int amount;
 public:
     Eggs(string name, int due_date, double weight, int amount) : Product(name, due_date, weight), amount(amount){}
-    void view(){
+    void view() override{
         cout << "Product: " << name << ". ";
         cout << "Number: " << amount << ". ";
         cout << "Weight: " << weight << ". ";

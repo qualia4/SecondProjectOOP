@@ -17,6 +17,7 @@ int main() {
     vector<Shelve*> shelves;
     vector<Freezer*> freezers;
     vector<Refrigerator*> refrigerators;
+    vector<Container*> containers;
     ifstream myFile;
     myFile.open("info.txt");
     string line;
@@ -47,6 +48,7 @@ int main() {
                 }
             }
             shelves.push_back(shelve);
+            containers.push_back(shelve);
         }
         else if(commands[0] == "Freezer"){
             Freezer* freezer = new Freezer();
@@ -64,6 +66,7 @@ int main() {
                 }
             }
             freezers.push_back(freezer);
+            containers.push_back(freezer);
         }
         else if(commands[0] == "Refrigerator"){
             Refrigerator* refrigerator = new Refrigerator();
@@ -81,6 +84,7 @@ int main() {
                 }
             }
             refrigerators.push_back(refrigerator);
+            containers.push_back(refrigerator);
         }
     }
     while(1){
@@ -127,14 +131,8 @@ int main() {
             }
         }
         else if(command == "nextDay"){
-            for(int i = 0; i < shelves.size(); i++){
-                shelves[i]->nextDay();
-            }
-            for(int i = 0; i < freezers.size(); i++){
-                freezers[i]->nextDay();
-            }
-            for(int i = 0; i < refrigerators.size(); i++){
-                refrigerators[i]->nextDay();
+            for(int i = 0; i < containers.size(); i++){
+                containers[i]->nextDay();
             }
             cout << "Done!" << endl;
         }

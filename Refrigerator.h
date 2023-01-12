@@ -1,20 +1,20 @@
-#include "Shelve.h"
+#include "Container.h"
 #ifndef SECONDPROJECTOOP_REFRIGERATOR_H
 #define SECONDPROJECTOOP_REFRIGERATOR_H
 
 
-class Refrigerator: public Shelve{
+class Refrigerator: public Container{
     int temperature = 0;
     int maxTemp = 10;
     int minTemp = -5;
 public:
-    using Shelve::Shelve;
-    using Shelve::addProduct;
-    using Shelve::take;
-    using Shelve::view;
-    using Shelve::nextDay;
-    using Shelve::getCapacity;
-    using Shelve::getFilled;
+    using Container::Container;
+    using Container::addProduct;
+    using Container::take;
+    using Container::view;
+    using Container::nextDay;
+    using Container::getCapacity;
+    using Container::getFilled;
     void setTemperature(int temp){
         if(temp >= minTemp && temp <= maxTemp){
             this->temperature = temp;
