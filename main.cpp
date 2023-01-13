@@ -14,9 +14,6 @@
 vector<string> split(const string line, char delim);
 
 int main() {
-    vector<Shelve*> shelves;
-    vector<Freezer*> freezers;
-    vector<Refrigerator*> refrigerators;
     vector<Container*> containers;
     ifstream myFile;
     myFile.open("info.txt");
@@ -29,7 +26,7 @@ int main() {
         cout << line << endl;
         vector<string> commands = split(line, ' ');
         if(commands[0] == "Shelve"){
-            Shelve* shelve = new Shelve();
+            Shelve* shelve = new Shelve("Shelve");
             int productsNum = stoi(commands[1]);
             int command = 2;
             for(int i = 0; i < productsNum; i++){
@@ -47,11 +44,10 @@ int main() {
                     command += 4;
                 }
             }
-            shelves.push_back(shelve);
             containers.push_back(shelve);
         }
         else if(commands[0] == "Freezer"){
-            Freezer* freezer = new Freezer();
+            Freezer* freezer = new Freezer("Freezer", -10, -1, -20);
             int productsNum = stoi(commands[1]);
             int command = 2;
             for(int i = 0; i < productsNum; i++){
@@ -65,11 +61,10 @@ int main() {
                     command += 4;
                 }
             }
-            freezers.push_back(freezer);
             containers.push_back(freezer);
         }
         else if(commands[0] == "Refrigerator"){
-            Refrigerator* refrigerator = new Refrigerator();
+            Refrigerator* refrigerator = new Refrigerator("Refrigerator", 0, 10, -5);
             int productsNum = stoi(commands[1]);
             int command = 2;
             for(int i = 0; i < productsNum; i++){
@@ -83,7 +78,6 @@ int main() {
                     command += 5;
                 }
             }
-            refrigerators.push_back(refrigerator);
             containers.push_back(refrigerator);
         }
     }
@@ -96,100 +90,59 @@ int main() {
         if(command == "break"){
             break;
         }
+
         else if(command == "viewAll"){
-            for(int i = 0; i < shelves.size(); i++){
-                cout << "Shelve " << i << ":" << endl;
-                shelves[i]->view();
-            }
-            for(int i = 0; i < freezers.size(); i++){
-                cout << "Freezer " << i << ":" << endl;
-                freezers[i]->view();
-            }
-            for(int i = 0; i < refrigerators.size(); i++){
-                cout << "Refrigerate  " << i << ":" << endl;
-                refrigerators[i]->view();
+            for(int i = 0; i < containers.size(); i++){
+                cout << containers[i]->getType() + " " << i << ":" << endl;
+                containers[i]->view();
             }
         }
         else if(command == "view"){
-            if(parametrs[1] == "shelves"){
-                for(int i = 0; i < shelves.size(); i++){
-                    cout << "Shelve " << i << ":" << endl;
-                    shelves[i]->view();
-                }
-            }
-            else if(parametrs[1] == "freezers"){
-                for(int i = 0; i < freezers.size(); i++){
-                    cout << "Freezer " << i << ":" << endl;
-                    freezers[i]->view();
-                }
-            }
-            else if(parametrs[2] == "refrigerators"){
-                for(int i = 0; i < refrigerators.size(); i++){
-                    cout << "Refrigerate  " << i << ":" << endl;
-                    refrigerators[i]->view();
+            string type = parametrs[1];
+            for(int i = 0; i < containers.size(); i++){
+                if(containers[i]->getType() == type){
+                    cout << type + " " << i << ":" << endl;
+                    containers[i]->view();
                 }
             }
         }
+
         else if(command == "nextDay"){
             for(int i = 0; i < containers.size(); i++){
                 containers[i]->nextDay();
             }
             cout << "Done!" << endl;
         }
+
         else if(command == "take"){
-            string container_type = parametrs[1];
-            int container_index = stoi(parametrs[2]);
-            if(container_type == "Shelve"){
-                shelves[container_index]->take(parametrs[3]);
-            }
-            else if(container_type == "Freezer"){
-                freezers[container_index]->take(parametrs[3]);
-            }
-            else if(container_type == "Refrigerator"){
-                refrigerators[container_index]->take(parametrs[3]);
-            }
+            int container_index = stoi(parametrs[1]);
+            containers[container_index]->take(parametrs[2]);
         }
+
         else if(command == "setTemp"){
-            string container_type = parametrs[1];
-            int container_index = stoi(parametrs[2]);
-            if(container_type == "Refrigerator"){
-                refrigerators[container_index]->setTemperature(stoi(parametrs[3]));
+            int container_index = stoi(parametrs[1]);
+            if(containers[container_index]->getType() == "Shelve"){
+                cout << "You can't set temperature in shelve" << endl;
             }
-            else if(container_type == "Freezer"){
-                freezers[container_index]->setTemperature(stoi(parametrs[3]));
+            else{
+                containers[container_index]->setTemperature(stoi(parametrs[2]));
             }
         }
+
         else if(command == "move"){
             string container_type = parametrs[1];
-            int container_index = stoi(parametrs[2]);
-            string element_name = parametrs[4];
-            int container2_index = stoi(parametrs[3]);
+            int container_index = stoi(parametrs[1]);
+            string element_name = parametrs[3];
+            int container2_index = stoi(parametrs[2]);
             Product* product;
-            if(container_type == "Shelve"){
-                product = shelves[container_index]->move(element_name);
-                shelves[container2_index]->addProduct(product);
-                cout << element_name << " successfully moved!" << endl;
-            }
-            else if(container_type == "Freezer"){
-                product = freezers[container_index]->move(element_name);
-                freezers[container2_index]->addProduct(product);
-                cout << element_name << " successfully moved!" << endl;
-            }
-            else if(container_type == "Refrigerator"){
-                product = refrigerators[container_index]->move(element_name);
-                refrigerators[container2_index]->addProduct(product);
-                cout << element_name << " successfully moved!" << endl;
-            }
+            product = containers[container_index]->move(element_name);
+            containers[container2_index]->addProduct(product);
+            cout << element_name << " successfully moved!" << endl;
         }
+
     }
-    for(int i = 0; i < shelves.size(); i++){
-        delete shelves[i];
-    }
-    for(int i = 0; i < refrigerators.size(); i++){
-        delete refrigerators[i];
-    }
-    for(int i = 0; i < freezers.size(); i++){
-        delete freezers[i];
+    for(int i = 0; i < containers.size(); i++){
+        delete containers[i];
     }
     myFile.close();
 }
