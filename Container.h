@@ -75,6 +75,9 @@ public:
     string getType(){
         return type;
     }
+    void printScope(){
+        cout << "Scope: " << minTemp << "-" << maxTemp << endl;
+    }
     ~Container(){
         for(int i = 0; i < products.size(); i++){
             delete[]products[i];

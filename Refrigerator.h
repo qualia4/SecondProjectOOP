@@ -16,9 +16,7 @@ public:
     using Container::getType;
     using Container::setTemperature;
     using Container::getTemperature;
-    void printScope(){
-        cout << "Scope: " << minTemp << "-" << maxTemp << endl;
-    }
+    using Container::printScope;
     ~Refrigerator(){
         for(int i = 0; i < products.size(); i++){
             delete[]products[i];
